@@ -10,7 +10,7 @@ Sin servidores, sin bases de datos — solo abrí el `index.html` y ya podés cr
 - **Tabla dinámica de productos**: agregá y eliminá filas con cálculo automático de subtotales y total
 - **Validez del presupuesto**: configurable en días, fechas calculadas automáticamente
 - **Notas / descripción**: campo libre para condiciones de pago, garantía, etc.
-- **Exportación a PDF**: un click con `html2pdf.js`
+- **Exportación a PDF**: apertura en ventana de impresión (Guardar como PDF nativo)
 - **Diseño responsive**: Bootstrap 5, funciona en celular, tablet y desktop
 - **Español y moneda local**: formato `$ 1.234,56`
 - **Seguridad básica OWASP**: sanitización de inputs, validación de archivos, CSP
@@ -27,7 +27,7 @@ Sin servidores, sin bases de datos — solo abrí el `index.html` y ya podés cr
 | CSS3 + Custom Properties | — | Estilos |
 | Bootstrap | 5.3.2 | Grid responsive + componentes |
 | JavaScript (Vanilla) | ES2020 | Toda la lógica |
-| html2pdf.js | 0.10.1 | Generación de PDF |
+| Web Print API (nativa) | — | Impresión / PDF nativo del navegador |
 | Google Fonts (Inter) | — | Tipografía |
 
 ## 🛠️ Uso

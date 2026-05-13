@@ -1,6 +1,5 @@
 /* ============================================================
    Presupuesto Simple — Lógica principal
-   Requiere: Bootstrap 5, html2pdf.js
    ============================================================ */
 
 'use strict';
@@ -347,48 +346,53 @@ function buildPdfHtml() {
 function generatePdf() {
   if (!validateForm()) return;
 
-  if (typeof html2pdf === 'undefined') {
-    alert('La librería de PDF no está disponible.\nUsá Ctrl+P y elegí "Guardar como PDF" en su lugar.');
-    return;
-  }
-
   dom.pdfBtn.disabled = true;
-  dom.pdfBtn.textContent = '⏳ Generando PDF…';
+  dom.pdfBtn.textContent = '⏳ Preparando…';
 
-  // Crear elemento temporal en el viewport para que html2canvas lo renderice
-  const temp = document.createElement('div');
-  temp.innerHTML = buildPdfHtml();
-  temp.style.cssText = 'position: fixed; top: 0; left: 0; width: 800px; background: #fff; z-index: 999999;';
-  document.body.appendChild(temp);
+  syncStateFromDom();
+  const html = buildPdfHtml();
+  const name = sanitizeFilename(state.client.name);
 
-  const opt = {
-    margin:        [0, 0, 0, 0],
-    filename:      `presupuesto-${sanitizeFilename(state.client.name)}.pdf`,
-    image:         { type: 'jpeg', quality: 0.95 },
-    html2canvas:   {
-      scale: 2,
-      useCORS: false,
-      allowTaint: true,
-      logging: false,
-      letterRendering: true,
-      backgroundColor: '#ffffff',
-    },
-    jsPDF:         { unit: 'mm', format: 'a4', orientation: 'portrait' },
-  };
+  // Iframe invisible para imprimir el presupuesto
+  const iframe = document.createElement('iframe');
+  iframe.style.cssText = 'position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; opacity: 0;';
+  document.body.appendChild(iframe);
 
-  html2pdf().set(opt).from(temp).save().then(() => {
-    document.body.removeChild(temp);
-    dom.pdfBtn.disabled = false;
-    dom.pdfBtn.innerHTML = '📄  Descargar PDF';
-  }).catch(err => {
-    console.error('Error al generar PDF:', err);
-    document.body.removeChild(temp);
-    dom.pdfBtn.disabled = false;
-    dom.pdfBtn.innerHTML = '📄  Descargar PDF';
-    if (confirm('No se pudo generar el PDF automáticamente.\n¿Querés usar la impresión del navegador (Ctrl+P) y elegir "Guardar como PDF"?')) {
-      window.print();
-    }
-  });
+  const doc = iframe.contentDocument || iframe.contentWindow.document;
+  doc.open();
+  doc.write(`
+    <!DOCTYPE html>
+    <html lang="es">
+    <head>
+      <meta charset="UTF-8">
+      <title>Presupuesto - ${escapeHtml(state.client.name)}</title>
+      <link rel="preconnect" href="https://fonts.googleapis.com">
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+      <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+      <link rel="stylesheet" href="css/styles.css">
+      <style>
+        body { background: #fff; padding: 0; margin: 0; font-family: 'Inter', sans-serif; }
+        .app-header, .app-footer, .no-print { display: none !important; }
+        @page { margin: 15mm; }
+      </style>
+    </head>
+    <body>${html}</body>
+    </html>
+  `);
+  doc.close();
+
+  // Dar tiempo a que carguen fuentes y estilos
+  setTimeout(() => {
+    iframe.contentWindow.focus();
+    iframe.contentWindow.print();
+
+    // Limpiar después del diálogo de impresión
+    setTimeout(() => {
+      if (iframe.parentNode) iframe.parentNode.removeChild(iframe);
+      dom.pdfBtn.disabled = false;
+      dom.pdfBtn.innerHTML = '📄  Descargar PDF';
+    }, 1000);
+  }, 600);
 }
 
 // --------------------------------------------------------------
