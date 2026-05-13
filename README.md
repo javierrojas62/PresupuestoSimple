@@ -17,7 +17,7 @@ Sin servidores, sin bases de datos — solo abrí el `index.html` y ya podés cr
 
 ## 🚀 Demo
 
-👉 [Ver demo en GitHub Pages](https://javierrojas62.github.io/presupuesto-simple)
+👉 [Ver demo en GitHub Pages](https://javierrojas62.github.io/PresupuestoSimple/)
 
 ## 📦 Tecnologías
 
@@ -29,17 +29,6 @@ Sin servidores, sin bases de datos — solo abrí el `index.html` y ya podés cr
 | JavaScript (Vanilla) | ES2020 | Toda la lógica |
 | Web Print API (nativa) | — | Impresión / PDF nativo del navegador |
 | Google Fonts (Inter) | — | Tipografía |
-
-## 🛠️ Uso
-
-1. Descargá o cloná el repositorio
-2. Abrí `index.html` en tu navegador (o servilo con cualquier http server)
-3. Completá los datos de empresa y cliente
-4. Agregá productos/servicios con sus cantidades y precios
-5. Ajustá los días de validez y las notas si querés
-6. Hacé click en **Descargar PDF**
-
-> **Tip**: podés hostearlo gratis en [GitHub Pages](https://pages.github.com/), [Netlify](https://www.netlify.com/) o [Vercel](https://vercel.com/).
 
 ## 🔒 Seguridad (OWASP)
 
@@ -62,25 +51,6 @@ presupuesto-simple/
 ├── .gitignore
 └── README.md
 ```
-
-## 🌐 Despliegue
-
-### GitHub Pages
-
-```bash
-git init
-git add .
-git commit -m "Primer commit"
-git remote add origin https://github.com/tuusuario/presupuesto-simple.git
-git branch -M main
-git push -u origin main
-```
-
-Luego en el repo: Settings → Pages → Source: `main` → `/root`.
-
-### Netlify / Vercel
-
-Arrastrá la carpeta del proyecto a la interfaz de deploy. No requiere configuración adicional.
 
 ## 📄 Licencia
 
