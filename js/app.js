@@ -81,7 +81,6 @@ function cacheDom() {
     addItemBtn     : document.getElementById('add-item-btn'),
     pdfBtn         : document.getElementById('pdf-btn'),
     resetBtn       : document.getElementById('reset-btn'),
-    pdfContainer   : document.getElementById('pdf-container'),
     form           : document.getElementById('invoice-form'),
   };
 }
@@ -345,17 +344,9 @@ function buildPdfHtml() {
   `;
 }
 
-function resetPdfContainer() {
-  dom.pdfContainer.style.left = '-9999px';
-  dom.pdfContainer.innerHTML = '';
-  dom.pdfBtn.disabled = false;
-  dom.pdfBtn.innerHTML = '📄  Descargar PDF';
-}
-
 function generatePdf() {
   if (!validateForm()) return;
 
-  // Verificar que html2pdf esté cargado
   if (typeof html2pdf === 'undefined') {
     alert('La librería de PDF no está disponible.\nUsá Ctrl+P y elegí "Guardar como PDF" en su lugar.');
     return;
@@ -364,9 +355,11 @@ function generatePdf() {
   dom.pdfBtn.disabled = true;
   dom.pdfBtn.textContent = '⏳ Generando PDF…';
 
-  const container = dom.pdfContainer;
-  container.innerHTML = buildPdfHtml();
-  container.style.left = '0';
+  // Crear elemento temporal en el viewport para que html2canvas lo renderice
+  const temp = document.createElement('div');
+  temp.innerHTML = buildPdfHtml();
+  temp.style.cssText = 'position: fixed; top: 0; left: 0; width: 800px; background: #fff; z-index: 999999;';
+  document.body.appendChild(temp);
 
   const opt = {
     margin:        [0, 0, 0, 0],
@@ -383,10 +376,15 @@ function generatePdf() {
     jsPDF:         { unit: 'mm', format: 'a4', orientation: 'portrait' },
   };
 
-  html2pdf().set(opt).from(container).save().then(resetPdfContainer).catch(err => {
+  html2pdf().set(opt).from(temp).save().then(() => {
+    document.body.removeChild(temp);
+    dom.pdfBtn.disabled = false;
+    dom.pdfBtn.innerHTML = '📄  Descargar PDF';
+  }).catch(err => {
     console.error('Error al generar PDF:', err);
-    resetPdfContainer();
-    // Fallback: ofrecer impresión nativa del navegador
+    document.body.removeChild(temp);
+    dom.pdfBtn.disabled = false;
+    dom.pdfBtn.innerHTML = '📄  Descargar PDF';
     if (confirm('No se pudo generar el PDF automáticamente.\n¿Querés usar la impresión del navegador (Ctrl+P) y elegir "Guardar como PDF"?')) {
       window.print();
     }
