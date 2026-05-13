@@ -17,7 +17,7 @@ Sin servidores, sin bases de datos — solo abrí el `index.html` y ya podés cr
 
 ## 🚀 Demo
 
-👉 [Ver demo en GitHub Pages](https://tuusuario.github.io/presupuesto-simple)
+👉 [Ver demo en GitHub Pages](https://javierrojas62.github.io/presupuesto-simple)
 
 ## 📦 Tecnologías
 
@@ -88,4 +88,4 @@ MIT — hacé lo que quieras con este proyecto.
 
 ---
 
-Hecho con ❤️ por [tu nombre](https://github.com/tuusuario)
+Hecho por [Rojas Informática](https://github.com/javierrojas62)
