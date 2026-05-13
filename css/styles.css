@@ -1,0 +1,502 @@
+/* ============================================================
+   Presupuesto Simple — Estilos personalizados
+   ============================================================ */
+
+/* ------- Variables CSS ------- */
+:root {
+  --primary: #0f172a;
+  --primary-light: #1e293b;
+  --accent: #3b82f6;
+  --accent-hover: #2563eb;
+  --bg: #f1f5f9;
+  --card-bg: #ffffff;
+  --text: #0f172a;
+  --text-muted: #64748b;
+  --border: #e2e8f0;
+  --success: #10b981;
+  --danger: #ef4444;
+  --radius: 12px;
+  --shadow: 0 1px 3px rgba(0, 0, 0, 0.06), 0 1px 2px rgba(0, 0, 0, 0.04);
+  --shadow-hover: 0 10px 25px -5px rgba(0, 0, 0, 0.08), 0 8px 10px -6px rgba(0, 0, 0, 0.02);
+  --font: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+/* ------- Reset / Base ------- */
+* { box-sizing: border-box; }
+
+body {
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ------- Header ------- */
+.app-header {
+  background: var(--primary);
+  color: #fff;
+  box-shadow: 0 4px 20px rgba(15, 23, 42, 0.15);
+  position: sticky;
+  top: 0;
+  z-index: 1020;
+}
+
+.header-icon { font-size: 2rem; line-height: 1; }
+
+.header-title {
+  font-weight: 800;
+  font-size: 1.4rem;
+  letter-spacing: -0.02em;
+}
+
+.header-subtitle {
+  font-weight: 400;
+  font-size: 0.85rem;
+  opacity: 0.75;
+}
+
+/* ------- Cards ------- */
+.section-card {
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  transition: box-shadow 0.2s ease;
+}
+
+.section-card:hover {
+  box-shadow: var(--shadow-hover);
+}
+
+.section-title {
+  font-weight: 700;
+  font-size: 1rem;
+  color: var(--primary);
+  margin-bottom: 1rem;
+  padding-bottom: 0.6rem;
+  border-bottom: 2px solid var(--accent);
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.section-icon { font-size: 1.2rem; }
+
+/* ------- Form Controls ------- */
+.form-control, .input-group-text {
+  border-color: var(--border);
+  border-radius: 8px;
+  font-size: 0.9rem;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.form-control:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
+}
+
+.form-label {
+  font-weight: 500;
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  margin-bottom: 0.25rem;
+}
+
+/* ------- Logo Upload ------- */
+.logo-upload {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.logo-preview {
+  width: 80px;
+  height: 80px;
+  border: 2px dashed var(--border);
+  border-radius: var(--radius);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  flex-shrink: 0;
+  background: var(--bg);
+  position: relative;
+  transition: border-color 0.2s;
+}
+
+.logo-preview:hover { border-color: var(--accent); }
+
+.logo-placeholder {
+  font-size: 2rem;
+  color: var(--text-muted);
+  font-weight: 300;
+  line-height: 1;
+}
+
+.logo-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  border-radius: 10px;
+}
+
+.btn-subir-logo {
+  border-radius: 8px;
+  font-weight: 500;
+  font-size: 0.8rem;
+}
+
+/* -======- Items Table -======- */
+.items-table {
+  font-size: 0.9rem;
+}
+
+.items-table thead th {
+  background: var(--bg);
+  font-weight: 600;
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--text-muted);
+  border-bottom: 2px solid var(--border);
+  white-space: nowrap;
+  padding: 0.6rem 0.5rem;
+}
+
+.items-table tbody td {
+  vertical-align: middle;
+  padding: 0.4rem 0.5rem;
+}
+
+.items-table .form-control {
+  border-radius: 6px;
+  font-size: 0.88rem;
+  padding: 0.35rem 0.5rem;
+}
+
+.col-producto { min-width: 180px; }
+.col-cantidad { min-width: 80px; width: 80px; }
+.col-precio   { min-width: 110px; width: 110px; }
+.col-subtotal { min-width: 110px; width: 110px; }
+.col-accion   { width: 48px; }
+
+.item-subtotal {
+  font-weight: 600;
+  color: var(--text);
+  white-space: nowrap;
+}
+
+.btn-delete-item {
+  width: 32px;
+  height: 32px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  padding: 0;
+  font-size: 1.1rem;
+  line-height: 1;
+}
+
+/* ------- Total Box ------- */
+.total-box {
+  background: var(--primary);
+  color: #fff;
+  padding: 0.55rem 1.5rem;
+  border-radius: var(--radius);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+.total-label {
+  font-weight: 500;
+  font-size: 0.85rem;
+  opacity: 0.8;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.total-amount {
+  font-weight: 800;
+  font-size: 1.4rem;
+  letter-spacing: -0.02em;
+}
+
+/* ------- Footer ------- */
+.app-footer {
+  margin-top: auto;
+  border-top: 1px solid var(--border);
+  background: var(--card-bg);
+}
+
+/* -======- PDF Preview Styles (usados dentro del contenedor oculto) -======- */
+.pdf-container {
+  position: fixed;
+  left: -9999px;
+  top: 0;
+  width: 210mm;
+  background: #fff;
+  font-family: 'Inter', sans-serif;
+  padding: 0;
+  z-index: -1;
+}
+
+.pdf-invoice {
+  padding: 20mm 15mm;
+  color: #1e293b;
+  font-size: 11pt;
+  line-height: 1.5;
+}
+
+.pdf-invoice .pdf-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 2rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 3px solid var(--primary);
+}
+
+.pdf-invoice .pdf-logo-img {
+  max-width: 100px;
+  max-height: 80px;
+  object-fit: contain;
+}
+
+.pdf-invoice .pdf-company-data {
+  text-align: right;
+}
+
+.pdf-invoice .pdf-company-name {
+  font-size: 18pt;
+  font-weight: 800;
+  color: var(--primary);
+  margin-bottom: 0.3rem;
+}
+
+.pdf-invoice .pdf-company-detail {
+  font-size: 9pt;
+  color: var(--text-muted);
+  margin: 0;
+}
+
+.pdf-invoice .pdf-client-section {
+  margin-bottom: 2rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.pdf-invoice .pdf-client-title {
+  font-size: 10pt;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-muted);
+  margin-bottom: 0.3rem;
+}
+
+.pdf-invoice .pdf-client-name {
+  font-size: 13pt;
+  font-weight: 700;
+}
+
+.pdf-invoice .pdf-client-detail {
+  font-size: 9pt;
+  color: var(--text-muted);
+  margin: 0;
+}
+
+.pdf-invoice .pdf-items-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 2rem;
+}
+
+.pdf-invoice .pdf-items-table th {
+  background: var(--primary);
+  color: #fff;
+  font-size: 9pt;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  padding: 8px 10px;
+  text-align: left;
+  font-weight: 600;
+}
+
+.pdf-invoice .pdf-items-table th.pdf-th-right {
+  text-align: right;
+}
+
+.pdf-invoice .pdf-items-table td {
+  padding: 8px 10px;
+  border-bottom: 1px solid var(--border);
+  font-size: 10pt;
+}
+
+.pdf-invoice .pdf-items-table td.pdf-td-right {
+  text-align: right;
+  font-weight: 600;
+}
+
+.pdf-invoice .pdf-items-table .pdf-total-row td {
+  border-top: 2px solid var(--primary);
+  font-weight: 800;
+  font-size: 13pt;
+  padding-top: 12px;
+}
+
+.pdf-invoice .pdf-valid-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+  font-size: 9pt;
+  color: var(--text-muted);
+}
+
+.pdf-invoice .pdf-notes {
+  margin-top: 1.5rem;
+  padding: 1rem;
+  background: var(--bg);
+  border-radius: 8px;
+  font-size: 9.5pt;
+  color: var(--text);
+  white-space: pre-wrap;
+}
+
+.pdf-invoice .pdf-notes-title {
+  font-weight: 700;
+  font-size: 9pt;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--text-muted);
+  margin-bottom: 0.3rem;
+}
+
+/* ------- Responsive ------- */
+@media (max-width: 768px) {
+  .header-title { font-size: 1.15rem; }
+  .header-subtitle { font-size: 0.75rem; }
+  .header-icon { font-size: 1.6rem; }
+
+  .section-title { font-size: 0.9rem; }
+
+  .items-table { font-size: 0.82rem; }
+  .items-table .form-control { font-size: 0.82rem; }
+
+  .col-producto { min-width: 130px; }
+  .col-cantidad { min-width: 65px; width: 65px; }
+  .col-precio { min-width: 90px; width: 90px; }
+  .col-subtotal { min-width: 90px; width: 90px; }
+
+  .total-box { padding: 0.4rem 1rem; }
+  .total-label { font-size: 0.75rem; }
+  .total-amount { font-size: 1.1rem; }
+
+  .btn-lg { font-size: 0.95rem; padding: 0.5rem 1.5rem; }
+
+  .logo-preview { width: 64px; height: 64px; }
+}
+
+@media (max-width: 576px) {
+  .container { padding-left: 12px; padding-right: 12px; }
+
+  .items-table thead th {
+    font-size: 0.7rem;
+    padding: 0.4rem 0.3rem;
+  }
+
+  .items-table tbody td { padding: 0.3rem; }
+
+  .col-producto { min-width: 110px; }
+  .col-cantidad { min-width: 55px; width: 55px; }
+  .col-precio { min-width: 80px; width: 80px; }
+  .col-subtotal { min-width: 80px; width: 80px; }
+}
+
+/* -======- Modo impresión (Ctrl+P / Guardar como PDF) -======- */
+@media print {
+  /* Ocultar solo elementos de interacción */
+  .app-header,
+  .app-footer,
+  #pdf-btn,
+  #reset-btn,
+  .btn-delete-item,
+  #add-item-btn,
+  .btn-subir-logo,
+  #logo-remove,
+  #logo-input { display: none !important; }
+
+  body {
+    background: #fff !important;
+    color: #000 !important;
+    font-size: 11pt;
+    margin: 0;
+    padding: 0;
+  }
+
+  .container { max-width: 100% !important; padding: 0 15mm !important; }
+
+  .section-card {
+    border: 1px solid #ccc !important;
+    border-radius: 4px !important;
+    break-inside: avoid;
+    page-break-inside: avoid;
+    margin-bottom: 1rem !important;
+  }
+
+  .section-title { border-bottom-color: #333 !important; }
+
+  /* Items table */
+  .items-table thead th {
+    background: #0f172a !important;
+    color: #fff !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .items-table tbody td { border-bottom: 1px solid #ddd; }
+
+  .item-subtotal { font-weight: 700; }
+
+  /* Total box */
+  .total-box {
+    background: #0f172a !important;
+    color: #fff !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  /* Inputs en print: mostrar el texto plano */
+  .form-control {
+    border: none !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    background: transparent !important;
+    font-size: 10pt;
+    color: #000 !important;
+  }
+  .form-control:focus { box-shadow: none !important; }
+
+  .input-group-text {
+    border: none !important;
+    background: transparent !important;
+    padding-left: 2px !important;
+    color: #000 !important;
+  }
+
+  /* Labels */
+  .form-label { color: #555 !important; font-size: 8pt; }
+
+  /* Validity section */
+  #issue-date, #valid-until { font-size: 10pt; }
+
+  /* Notas */
+  #description { border: none !important; padding: 0 !important; }
+
+  /* Asegurar que los valores de los inputs se vean */
+  input, textarea { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+
+  @page { margin: 15mm; }
+}
